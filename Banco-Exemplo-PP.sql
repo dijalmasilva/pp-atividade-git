@@ -1,0 +1,7 @@
+﻿CREATE TABLE Usuario (
+	id SERIAL NOT NULL,	
+	nome VARCHAR(50) NOT NULL,
+	sobrenome VARCHAR(50) NOT NULL,
+	idade INTEGER NOTNULL,
+	PRIMARY KEY(id)
+);
