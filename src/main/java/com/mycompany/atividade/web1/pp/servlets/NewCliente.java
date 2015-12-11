@@ -31,8 +31,6 @@ public class NewCliente extends HttpServlet{
         String sobrenome = req.getParameter("sobrenome");
         int idade = Integer.parseInt(req.getParameter("idade"));
         
-        Usuario u = new Usuario(nome, sobrenome, idade);
-        
         GerenciadorDeUsuario gu = new GerenciadorDeUsuario();
         try {
             gu.adicionarUsuario(nome, sobrenome, idade);
