@@ -21,6 +21,7 @@
                 <input type="text" placeholder="Nome" name="nome"><br><br>
                 <input type="text" placeholder="Sobrenome" name="sobrenome"><br><br>
                 <input type="number" placeholder="Idade" name="idade"><br><br>
+                <input type="submit" value="Cadastrar"><br><br>
             </form>
         </div>
         <c:if test="${cadastro} == true">

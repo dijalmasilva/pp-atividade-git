@@ -11,7 +11,7 @@ public class GerenciadorDeUsuario {
     public void adicionarUsuario(String nome, String sobrenome, int idade) throws SQLException {
         Usuario novoUsu = new Usuario();
         novoUsu.setNome(nome);
-        novoUsu.setSobrenome(nome);
+        novoUsu.setSobrenome(sobrenome);
         novoUsu.setIdade(idade);
 
         DaoFactoryIF fabrica = DaoFactory.creatFactory();

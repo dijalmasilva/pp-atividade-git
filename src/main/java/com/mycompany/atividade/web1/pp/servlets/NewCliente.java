@@ -6,7 +6,11 @@
 package com.mycompany.atividade.web1.pp.servlets;
 
 import com.mycompany.atividade.web1.pp.entidades.Usuario;
+import com.mycompany.atividade.web1.pp.gerenciadores.GerenciadorDeUsuario;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +32,14 @@ public class NewCliente extends HttpServlet{
         int idade = Integer.parseInt(req.getParameter("idade"));
         
         Usuario u = new Usuario(nome, sobrenome, idade);
+        
+        GerenciadorDeUsuario gu = new GerenciadorDeUsuario();
+        try {
+            gu.adicionarUsuario(nome, sobrenome, idade);
+        } catch (SQLException ex) {
+            Logger.getLogger(NewCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     

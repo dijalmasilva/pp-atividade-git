@@ -24,13 +24,17 @@ public class UsuarioDao implements UsuarioDaoIF {
 
     public void cadastrar(Usuario entidade) throws SQLException {
 
-        String SQL = "insert into usuario(nome, sobrenome, idade) values (?,?,?)";
-        pstm = con.prepareStatement(SQL);
-        pstm.setString(1, entidade.getNome());
-        pstm.setString(2, entidade.getSobrenome());
-        pstm.setInt(3, entidade.getIdade());
+        try {
+            String SQL = "insert into usuario(nome, sobrenome, idade) values (?,?,?)";
+            pstm = con.prepareStatement(SQL);
+            pstm.setString(1, entidade.getNome());
+            pstm.setString(2, entidade.getSobrenome());
+            pstm.setInt(3, entidade.getIdade());
 
-        pstm.executeUpdate();
+            pstm.executeUpdate();
+        } finally {
+            co.liberar();
+        }
     }
 
     public void remover(Usuario entidade) throws SQLException {
