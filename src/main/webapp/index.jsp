@@ -12,6 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bem vindo!</h1>
+        <br><br><br>
+        <a href="novoUsuario.jsp">Cadastrar usuário</a>
     </body>
 </html>
