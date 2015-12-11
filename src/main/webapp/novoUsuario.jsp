@@ -4,6 +4,7 @@
     Author     : IFPB
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,5 +23,8 @@
                 <input type="number" placeholder="Idade" name="idade"><br><br>
             </form>
         </div>
+        <c:if test="${cadastro} == true">
+            <h4>Usuario Cadastrado com sucessso</h4>
+        </c:if>
     </body>
 </html>
