@@ -6,7 +6,10 @@ import com.mycompany.atividade.web1.pp.entidades.Usuario;
 import com.mycompany.atividade.web1.pp.interfaces.UsuarioDaoIF;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioDao implements UsuarioDaoIF {
 
@@ -22,8 +25,11 @@ public class UsuarioDao implements UsuarioDaoIF {
         }
     }
 
-    public void cadastrar(Usuario entidade) throws SQLException {
+    @Override
+    public boolean cadastrar(Usuario entidade) throws SQLException {
 
+        boolean result = false;
+        
         try {
             String SQL = "insert into usuario(nome, sobrenome, idade) values (?,?,?)";
             pstm = con.prepareStatement(SQL);
@@ -32,23 +38,60 @@ public class UsuarioDao implements UsuarioDaoIF {
             pstm.setInt(3, entidade.getIdade());
 
             pstm.executeUpdate();
+            result = true;
         } finally {
             co.liberar();
         }
+        
+        return result;
     }
 
-    public void remover(Usuario entidade) throws SQLException {
+    @Override
+    public boolean remover(int id) throws SQLException {
+        
+        boolean result = false;
+        
         try {
 
-            String SQL = "delete from usuario where nome=?";
+            String SQL = "delete from usuario where id = ?";
 
             pstm = con.prepareStatement(SQL);
-            pstm.setString(1, entidade.getNome());
+            pstm.setInt(1, id);
 
             pstm.executeUpdate();
+            
+            result = true;
         } finally {
             co.liberar();
         }
+        
+        return result;
     }
 
+    @Override
+    public List<Usuario> listaUsuarios() throws SQLException{
+        List<Usuario> users = new ArrayList<>();
+        
+        try{
+            String SQL = "select * from usuario";
+            
+            pstm = con.prepareStatement(SQL);
+            ResultSet rs = pstm.executeQuery();
+            
+            while(rs.next()){
+                Usuario u = new Usuario();
+                u.setNome(rs.getString("nome"));
+                u.setSobrenome(rs.getString("sobrenome"));
+                u.setIdade(rs.getInt("idade"));
+                u.setId(rs.getInt("id"));
+                
+                users.add(u);
+            }
+            
+        }finally{
+            co.liberar();
+        }
+        
+        return users;
+    }
 }

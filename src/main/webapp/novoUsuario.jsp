@@ -24,8 +24,10 @@
                 <input type="submit" value="Cadastrar"><br><br>
             </form>
         </div>
-        <c:if test="${cadastro} == true">
+        <c:if test="${cadastro == true}">
             <h4>Usuario Cadastrado com sucessso</h4>
         </c:if>
+            <br><br><br>
+            <a href="index.jsp">Voltar</a>
     </body>
 </html>

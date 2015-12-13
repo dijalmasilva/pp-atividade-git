@@ -10,7 +10,8 @@ package com.mycompany.atividade.web1.pp.entidades;
  * @author IFPB
  */
 public class Usuario {
-    
+
+   private int id;
    private String nome;
    private String sobrenome;
    private int idade;
@@ -47,4 +48,12 @@ public class Usuario {
     public void setIdade(int idade) {
         this.idade = idade;
     }   
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
 }

@@ -5,6 +5,11 @@
  */
 package com.mycompany.atividade.web1.pp.servlets;
 
+/**
+ *
+ * @author dijalma
+ */
+
 import com.mycompany.atividade.web1.pp.gerenciadores.GerenciadorDeUsuario;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,30 +21,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author IFPB
- */
-@WebServlet(urlPatterns = {"/newCliente"})
-public class NewCliente extends HttpServlet{
+@WebServlet(urlPatterns = {"/removeUser"})
+public class RemoveCliente extends HttpServlet{
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        String nome = req.getParameter("nome");
-        String sobrenome = req.getParameter("sobrenome");
-        int idade = Integer.parseInt(req.getParameter("idade"));
-        boolean cadastro = false;
+        int id = Integer.parseInt(req.getParameter("id"));
         
-        GerenciadorDeUsuario gu = new GerenciadorDeUsuario();
+        boolean r = false;
+        
         try {
-            cadastro = gu.adicionarUsuario(nome, sobrenome, idade);
+            r = new GerenciadorDeUsuario().removerUsuario(id);
         } catch (SQLException ex) {
-            Logger.getLogger(NewCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoveCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        req.setAttribute("cadastro", cadastro);
-        req.getRequestDispatcher("novoUsuario.jsp").forward(req, resp);
+        req.setAttribute("removeu", r);
+        
+        req.getRequestDispatcher("users").forward(req, resp);
     }
     
     

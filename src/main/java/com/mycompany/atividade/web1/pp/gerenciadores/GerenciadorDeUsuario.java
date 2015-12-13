@@ -5,10 +5,11 @@ import com.mycompany.atividade.web1.pp.fabricas.DaoFactory;
 import com.mycompany.atividade.web1.pp.fabricas.DaoFactoryIF;
 import com.mycompany.atividade.web1.pp.interfaces.UsuarioDaoIF;
 import java.sql.SQLException;
+import java.util.List;
 
 public class GerenciadorDeUsuario {
 
-    public void adicionarUsuario(String nome, String sobrenome, int idade) throws SQLException {
+    public boolean adicionarUsuario(String nome, String sobrenome, int idade) throws SQLException {
         Usuario novoUsu = new Usuario();
         novoUsu.setNome(nome);
         novoUsu.setSobrenome(sobrenome);
@@ -16,13 +17,19 @@ public class GerenciadorDeUsuario {
 
         DaoFactoryIF fabrica = DaoFactory.creatFactory();
         UsuarioDaoIF usuDao = fabrica.criaUsuarioDao();
-        usuDao.cadastrar(novoUsu);
+        return usuDao.cadastrar(novoUsu);
     }
 
-    public void removerUsuario(Usuario u) throws SQLException {
+    public boolean removerUsuario(int id) throws SQLException {
         DaoFactoryIF fabrica = DaoFactory.creatFactory();
         UsuarioDaoIF usuDao = fabrica.criaUsuarioDao();
-        usuDao.remover(u);
+        return usuDao.remover(id);
     }
 
+
+    public List<Usuario> listaUsuarios() throws SQLException {
+        DaoFactoryIF fabrica = DaoFactory.creatFactory();
+        UsuarioDaoIF usuDao = fabrica.criaUsuarioDao();
+        return usuDao.listaUsuarios();
+    }
 }
